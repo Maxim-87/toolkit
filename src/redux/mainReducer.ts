@@ -26,6 +26,7 @@ export const mainReducer = (state: StateType = initialState, action: any) => {
                 count: state.count - 1
             }
         case ADD_TODO:
+            console.log(action.payload)
             return {
                 ...state,
                 todos: [...state.todos, action.payload]
@@ -43,5 +44,6 @@ export const mainReducer = (state: StateType = initialState, action: any) => {
 
 export const increment = () => ({type: INCREMENT})
 export const decrement = () => ({type: DECREMENT})
-export const addTodo = () => ({type: ADD_TODO})
+export const addTodo = (todo: string) => ({type: ADD_TODO, payload: todo})
+
 export const removeLastTodo = () => ({type: REMOVE_LAST_TODO})

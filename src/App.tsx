@@ -1,24 +1,51 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import {useDispatch, useSelector} from "react-redux";
+import {addTodo, decrement, increment, removeLastTodo} from "./redux/mainReducer";
 
 function App() {
+
+    const {count, todos} = useSelector((state: any) => state.main)
+    const dispatch = useDispatch();
+
+    const incrementHandler = () => {
+        dispatch(increment())
+    }
+
+    const decrementHandler = () => {
+        dispatch(decrement())
+    }
+
+   const addTodoHandler = () => {
+        dispatch(addTodo())
+    }
+
+   const removeTodoHandler = () => {
+        dispatch(removeLastTodo())
+    }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <div>
+            {count}
+        </div>
+     <button onClick={incrementHandler}>
+         Increment
+     </button>
+        <button onClick={decrementHandler}>
+         Decrement
+     </button>
+        <button onClick={addTodoHandler}>
+         Add todos
+     </button>
+        <button onClick={removeTodoHandler}>
+         Delete todos
+     </button>
+        <ul>
+            {todos.map((todo: any) => <li key={todo}> todo </li>)}
+        </ul>
     </div>
   );
 }
